@@ -76,11 +76,12 @@ export async function POST(req: NextRequest) {
         "anthropic-version": "2023-06-01",
       },
       body: JSON.stringify({
-        model: "claude-sonnet-5", // TODO: swap for a different model string if you prefer
+        model: process.env.NODE_ENV === 'development' ? 'claude-haiku-4-5-20251001' : 'claude-sonnet-5', // TODO: swap for a different model string if you prefer
         max_tokens: 1000,
         messages: [{ role: "user", content: buildPrompt(patient, sessions) }],
       }),
     });
+    console.log(process.env.NODE_ENV)
 
     if (!response.ok) {
       console.error("Anthropic API error:", await response.text());
