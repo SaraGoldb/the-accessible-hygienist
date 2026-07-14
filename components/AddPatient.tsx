@@ -9,6 +9,7 @@ import { useState } from "react";
 import { Card } from "@/components/ui/Card";
 import { SectionHead } from "@/components/ui/SectionHead";
 import { Pill } from "@/components/ui/Pill";
+import Combobox from "@/components/ui/Combobox";
 import { CAREGIVER_TITLES, STAGES } from "@/lib/constants";
 import { uid, fmtCaregiver, parseCaregiver } from "@/lib/utils";
 import type { Patient } from "@/lib/types";
@@ -101,18 +102,19 @@ export function AddPatient({
       {/* Avatar picker */}
       <Card className="mb-4">
         <SectionHead title="Avatar" />
-        <div className="grid grid-cols-4 sm:grid-cols-12 gap-3">
+        <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-12 gap-3">
           {AVATARS.map((a) => (
             <button
               key={a}
               onClick={() => setForm((f) => ({ ...f, avatar: a }))}
-              className={`aspect-square w-full rounded-full flex items-center justify-center !text-[clamp(1.5rem,5vw,2.5rem)] cursor-pointer border-2 transition-colors ${
+              className={`aspect-square w-full rounded-full flex items-center justify-center cursor-pointer border-2 transition-colors @container ${
                 form.avatar === a
                   ? "border-sage bg-sage-light"
                   : "border-line bg-transparent"
               }`}
             >
-              {a}
+              {/* fill 60% of the button's width */}
+              <span style={{ fontSize: "60cqw", lineHeight: 1 }}>{a}</span>
             </button>
           ))}
         </div>
@@ -165,16 +167,13 @@ export function AddPatient({
             </div>
             <div>
               <label className={LABEL_CLASS}>Relationship to patient</label>
-              <input
-                list="caregiver-titles"
+              <Combobox
                 value={c.title}
-                onChange={(e) => setCg(i, "title", e.target.value)}
+                onChange={(v) => setCg(i, "title", v)}
+                options={CAREGIVER_TITLES}
                 placeholder="e.g. day aide"
-                className={`${INPUT_CLASS} mb-2`}
+                inputClassName={`${INPUT_CLASS} mb-2`}
               />
-              <datalist id="caregiver-titles">
-                {CAREGIVER_TITLES.map((t) => (<option key={t} value={t} />))}
-              </datalist>
             </div>
           </div>
         ))}

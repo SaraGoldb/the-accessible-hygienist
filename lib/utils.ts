@@ -2,7 +2,10 @@ import type { Session } from "./types";
 
 export const uid = () => Math.random().toString(36).slice(2, 9);
 
-export const today = () => new Date().toISOString().split("T")[0];
+// en-CA formats as YYYY-MM-DD, which conveniently matches what <input type="date">
+// and Postgres expect. Using Intl instead of toISOString() avoids UTC conversion
+// shifting the date by a day for users west of UTC.
+export const today = () => new Intl.DateTimeFormat("en-CA").format(new Date());
 
 export const fmtDate = (d: string) => {
   if (!d) return "";

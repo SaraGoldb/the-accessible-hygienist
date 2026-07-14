@@ -40,7 +40,7 @@ export function PatientDashboard({
   const [tab, setTab] = useState(0);
   // Reset scroll to top whenever the active tab changes.
   useEffect(() => {
-    window.scrollTo(0, 0);
+    requestAnimationFrame(() => window.scrollTo(0, 0));
   }, [tab]);
   
   // Whether the "delete patient?" confirmation is visible in the header.
@@ -158,7 +158,6 @@ export function PatientDashboard({
               await onAddSession(s);
               setToast("Session saved!"); // Trigger the toast message
               setTab(HISTORY_TAB);        // Redirect to History tab
-              window.scrollTo(0, 0);
             }}
           />
         )}

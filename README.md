@@ -56,6 +56,76 @@ lib/
   seed.ts            Sample patient + sessions shown on first load
 ```
 
+# Tree
+```
+THE-ACCESSIBLE-HYGIENIST/
+|   
+├── app/
+|   ├── api/
+|   │   ├── checkout/route.ts
+|   │   ├── generate-plan/route.ts
+|   │   └── stripe/webhook/route.ts
+|   ├── sign-in/
+|   │   └── [[...sign-in]]/page.tsx
+|   ├── sign-up/
+|   │   └── [[...sign-up]]/page.tsx
+|   ├── test-supabase/page.tsx
+|   ├── emoji_favicon.ico
+|   ├── favicon.ico
+|   ├── globals.css
+|   ├── layout.tsx
+|   └── page.tsx
+|   
+├── components/
+|   ├── tabs/
+|   │   ├── CarePlanTab.tsx
+|   │   ├── HistoryTab.tsx
+|   │   ├── InsightsTab.tsx
+|   │   └── LogTab.tsx
+|   ├── ui/
+|   │   ├── Card.tsx
+|   │   ├── ConfirmModal.tsx
+|   │   ├── DiscomfortSlider.tsx
+|   │   ├── InsightRow.tsx
+|   │   ├── Pill.tsx
+|   │   ├── SectionHead.tsx
+|   │   ├── StatTile.tsx
+|   │   └── Toast.tsx
+|   ├── AddPatient.tsx
+|   ├── HomePage.tsx
+|   ├── PatientDashboard.tsx
+|   ├── PatientList.tsx
+|   └── SessionForm.tsx
+|   
+├── lib/
+|   ├── supabase/
+|   │   ├── client.ts
+|   │   ├── queries.ts
+|   │   └── server.ts
+|   ├── colors.ts
+|   ├── constants.ts
+|   ├── seed.ts
+|   ├── storage.ts
+|   ├── styles.ts
+|   ├── types.ts
+|   └── utils.ts
+|   
+├── node_modules/
+├── public/
+├── .env.local
+├── .gitignore
+├── eslint.config.mjs
+├── next-env.d.ts
+├── next.config.ts
+├── package.json
+├── pnpm-lock.yaml
+├── pnpm-workspace.yaml
+├── postcss.config.mjs
+├── proxy.ts
+├── README.md
+└── tsconfig.json
+```
+
 ## Next steps toward V2
 
 1. Add Clerk auth (`middleware.ts`, wrap layout in `<ClerkProvider>`, add

@@ -29,7 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <body className={`${playfairDisplay.variable} ${lato.variable}`}>
           <ClerkProvider>
             <Show when="signed-in">
-              <UserButton appearance={{ elements: { rootBox: "fixed top-7 right-7 z-50"}}}/>
+              <UserButton appearance={{ elements: { rootBox: "fixed top-4 right-4 z-50"}}}/>
             </Show>
             {children}
           </ClerkProvider>

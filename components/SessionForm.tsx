@@ -4,6 +4,7 @@
 import { Card } from "@/components/ui/Card";
 import { Pill } from "@/components/ui/Pill";
 import { SectionHead } from "@/components/ui/SectionHead";
+import Combobox from "@/components/ui/Combobox";
 import { MOODS, COMPLETION, TRIGGERS, HELPS, TOOLS, VISUAL_FINDINGS, PATIENT_COMPLAINTS, TIMES, CAREGIVER_TITLES } from "@/lib/constants";
 import { COLOR_HEX, withAlpha } from "@/lib/colors";
 import { toggle } from "@/lib/utils";
@@ -61,7 +62,7 @@ export function SessionForm({
       <Section useCards={useCards}>
         <SectionHead title="Session Info" />
         <div className="grid grid-cols-2 gap-3 mb-3">
-          <div>
+          <div className="min-w-0">
             <label className={LABEL_CLASS}>Date</label>
             <input 
               type="date" 
@@ -70,7 +71,7 @@ export function SessionForm({
               className={INPUT_CLASS} 
             />
           </div>
-          <div>
+          <div className="min-w-0">
             <label className={LABEL_CLASS}>Time of Day</label>
             <select value={form.time}
               onChange={(e) => setForm((f: any) => ({ ...f, time: e.target.value }))}
@@ -86,17 +87,13 @@ export function SessionForm({
         <label className={LABEL_CLASS}>Caregiver</label>
         {!addingNew ? (
           <>
-            <input
-              list={`caregivers-${patient.id}`}
+            <Combobox
               value={form.caregiverName}
-              onChange={(e) => setForm((f: any) => ({ ...f, caregiverName: e.target.value }))}
+              onChange={(v) => setForm((f: any) => ({ ...f, caregiverName: v }))}
+              options={patient.caregivers ?? []}
               placeholder="Your name or select from care team"
-              className={INPUT_CLASS}
-              autoComplete="off"
+              inputClassName={INPUT_CLASS}
             />
-            <datalist id={`caregivers-${patient.id}`}>
-              {(patient.caregivers ?? []).map((name) => (<option key={name} value={name} />))}
-            </datalist>
             <button
               type="button"
               onClick={() => {
@@ -111,28 +108,22 @@ export function SessionForm({
         ) : (
           <>
             <div className="grid grid-cols-2 gap-3">
-              <div>
-                <input
-                  value={form.caregiverName}
-                  onChange={(e) => setForm((f: any) => ({ ...f, caregiverName: e.target.value }))}
-                  placeholder="Name"
-                  className={INPUT_CLASS}
-                  autoComplete="off"
-                />
-              </div>
-              <div>
-                <input
-                  list="caregiver-titles"
-                  value={form.caregiverTitle}
-                  onChange={(e) => setForm((f: any) => ({ ...f, caregiverTitle: e.target.value }))}
-                  placeholder="Relationship to patient"
-                  className={INPUT_CLASS}
-                  autoComplete="off"
-                />
-                <datalist id="caregiver-titles">
-                  {CAREGIVER_TITLES.map((t) => <option key={t} value={t} />)}
-                </datalist>
-              </div>
+              {/* Free text input for new caregiver name */}
+              <input
+                value={form.caregiverName}
+                onChange={(e) => setForm((f: any) => ({ ...f, caregiverName: e.target.value }))}
+                placeholder="Name"
+                className={INPUT_CLASS}
+                autoComplete="off"
+              />
+              {/* Text input with dropdown list of suggested caregiver titles */}
+              <Combobox
+                value={form.caregiverTitle}
+                onChange={(v) => setForm((f: any) => ({ ...f, caregiverTitle: v }))}
+                options={CAREGIVER_TITLES}
+                placeholder="Relationship to patient"
+                inputClassName={INPUT_CLASS}
+              />
             </div>
             <button
               type="button"
@@ -214,7 +205,7 @@ export function SessionForm({
       {/* Triggers */}
       <Section useCards={useCards}>
         <SectionHead title="What Caused Difficulty" icon="⚠️" color="red" />
-        <div className="flex flex-wrap gap-2">
+        <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2">
           {TRIGGERS.map((t) => (
             <Pill 
               key={t} 
@@ -230,7 +221,7 @@ export function SessionForm({
       {/* Helps */}
       <Section useCards={useCards}>
         <SectionHead title="What Made It Better" icon="✨" color="green" />
-        <div className="flex flex-wrap gap-2">
+        <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2">
           {HELPS.map((h) => (
             <Pill 
               key={h} 
@@ -251,7 +242,7 @@ export function SessionForm({
             ▶ One or more findings require dental professional follow-up.
           </div>
         )}
-        <div className="flex flex-wrap gap-2">
+        <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2">
           {VISUAL_FINDINGS.map((f) => {
             const sel = form.findings.includes(f.label);
             const isFlag = f.urgency === "flag";
@@ -262,7 +253,7 @@ export function SessionForm({
                 key={f.label}
                 onClick={() => setForm((fm: any) => ({ ...fm, findings: toggle(fm.findings, f.label) }))}
                 style={sel ? selectedStyle(hex, "15") : undefined}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-body min-h-11 border-[1.5px] ${sel ? "font-bold" : "border-line text-ink-light"}`}
+                className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-xs font-body min-h-11 border-[1.5px] ${sel ? "font-bold" : "border-line text-ink-light"}`}
               >
                 {f.icon} {f.label}
               </button>

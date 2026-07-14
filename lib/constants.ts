@@ -11,12 +11,12 @@ export const TRIGGERS = [
 ];
 
 export const HELPS = [
-  "Soft music","Dim lighting","Warm water","Extra-soft bristles",
-  "Short sessions (< 2 min)","Calm conversation","Familiar caregiver",
-  "Morning routine","Evening routine","Hand-over-hand guidance",
-  "Visual picture cues","Preferred toothpaste flavor","Electric toothbrush",
-  "Manual toothbrush","Positive verbal cues","Extra rinse time",
-  "Sitting upright","Distraction technique","Same sequence each time",
+  "Preferred toothpaste flavor","Extra-soft bristles",
+  "Manual toothbrush","Electric toothbrush","Warm water","Extra rinse time",
+  "Morning routine","Evening routine","Familiar caregiver","Soft music",
+  "Dim lighting","Sitting upright","Visual picture cues","Positive verbal cues",
+  "Calm conversation","Hand-over-hand guidance",
+  "Short sessions (< 2 min)","Distraction technique","Same sequence each time",
 ];
 
 export const TOOLS = [

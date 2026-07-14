@@ -127,7 +127,12 @@ export function HistoryTab({
   const handleSave = (updated: Session) => {
     onUpdate(updated);
     setEditingId(null);
-    window.scrollTo({top: savedScroll}); // restore scroll position
+    requestAnimationFrame(() => window.scrollTo({top: savedScroll})); // restore scroll position
+  };
+
+    const handleCancel = () => {
+    setEditingId(null);
+    requestAnimationFrame(() => window.scrollTo({top: savedScroll})); // restore scroll position
   };
 
   const handleDelete = (id: string) => {
@@ -267,10 +272,7 @@ export function HistoryTab({
                     patient={patient}
                     session={s}
                     onSave={handleSave}
-                    onCancel={() => {
-                      setEditingId(null);
-                      window.scrollTo({top: savedScroll});
-                    }}
+                    onCancel={handleCancel}
                   />
                 )}
               </div>
