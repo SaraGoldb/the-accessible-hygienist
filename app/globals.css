@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@theme {
+  --color-sage: #6b9a78;
+  --color-sage-muted: #7fb18d;
+  --color-sage-dark: #4a7258;
+  --color-sage-light: #eaf2ec;
+
+  --color-blue: #5278a0;
+  --color-blue-light: #dde9f5;
+
+  --color-mauve: #9a7088;
+  --color-mauve-light: #f2e8ef;
+
+  --color-cream: #f9f6f0;
+  --color-parchment: #f2ede4;
+
+  --color-ink: #252320;
+  --color-ink-md: #5a5550;
+  --color-ink-light: #8a857e;
+
+  --color-line: #ddd8d0;
+  --color-line-light: #ede9e2;
+
+  --color-red: #b85c5c;
+  --color-red-light: #fbeaea;
+
+  --color-amber: #b88a3a;
+  --color-amber-light: #fdf4e2;
+
+  --color-green: #4e8860;
+  --color-green-light: #e5f2ea;
+
+  --color-teal: #4a8a8a;
+  --color-teal-light: #e2f2f2;
+
+  /* if playfair is unavailable, fall back to Georgia, and if Georgia is unavailable, fall back to serif. Similar for body font. */
+  --font-display: var(--font-playfair), Georgia, serif;
+  --font-body: var(--font-lato), "Helvetica Neue", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #f9f6f0;
+  /* Base font size bumped up from browser default 16px so everything
+     reads comfortably on both mobile and desktop. */
+  font-size: 16px;
+}
+
+input,
+select,
+textarea,
+button {
+  outline: none;
+  /* Inherit body font size so form controls scale with the page. */
+  font-size: inherit;
+}
+
+/* Native datalist/autocomplete dropdown inherits font correctly in most
+   browsers when set here rather than inline. */
+datalist {
+  font-family: var(--font-body);
+}
+
+input[type="range"] {
+  height: 4px;
+}
